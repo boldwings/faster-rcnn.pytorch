@@ -119,6 +119,13 @@ cd faster-rcnn.pytorch && mkdir data
 
 * **Visual Genome**: Please follow the instructions in [bottom-up-attention](https://github.com/peteanderson80/bottom-up-attention) to prepare Visual Genome dataset. You need to download the images and object annotation files first, and then perform proprecessing to obtain the vocabulary and cleansed annotations based on the scripts provided in this repository.
 
+To correctly setup the VOC dataset, make symlinks as such:
+```
+mkdir -p data/VOCdevkit2007
+ln -s PATH_TO_DATA/VOCdevkit/* data/VOCdevkit2007/
+```
+in both the root and `lib` folders.
+
 ### Pretrained Model
 
 We used two pretrained models in our experiments, VGG and ResNet101. You can download these two models from:

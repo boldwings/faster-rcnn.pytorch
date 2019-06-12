@@ -7,7 +7,6 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import _init_paths
 import os
 import sys
 import numpy as np
@@ -24,14 +23,14 @@ import torch.optim as optim
 import torchvision.transforms as transforms
 from torch.utils.data.sampler import Sampler
 
-from roi_data_layer.roidb import combined_roidb
-from roi_data_layer.roibatchLoader import roibatchLoader
-from model.utils.config import cfg, cfg_from_file, cfg_from_list, get_output_dir
-from model.utils.net_utils import weights_normal_init, save_net, load_net, \
-      adjust_learning_rate, save_checkpoint, clip_gradient
+from faster_rcnn.roi_data_layer.roidb import combined_roidb
+from faster_rcnn.roi_data_layer.roibatchLoader import roibatchLoader
+from faster_rcnn.model.utils.config import cfg, cfg_from_file, cfg_from_list, get_output_dir
+from faster_rcnn.model.utils.net_utils import weights_normal_init, save_net, load_net, \
+                                              adjust_learning_rate, save_checkpoint, clip_gradient
 
-from model.faster_rcnn.vgg16 import vgg16
-from model.faster_rcnn.resnet import resnet
+from faster_rcnn.model.faster_rcnn.vgg16 import vgg16
+from faster_rcnn.model.faster_rcnn.resnet import resnet
 
 def parse_args():
   """
@@ -68,7 +67,7 @@ def parse_args():
                       action='store_true')
   parser.add_argument('--ls', dest='large_scale',
                       help='whether use large imag scale',
-                      action='store_true')                      
+                      action='store_true')
   parser.add_argument('--mGPUs', dest='mGPUs',
                       help='whether use multiple GPUs',
                       action='store_true')
@@ -264,7 +263,7 @@ if __name__ == '__main__':
 
   if args.cuda:
     fasterRCNN.cuda()
-      
+
   if args.optimizer == "adam":
     lr = lr * 0.1
     optimizer = torch.optim.Adam(params)
@@ -369,7 +368,7 @@ if __name__ == '__main__':
         loss_temp = 0
         start = time.time()
 
-    
+
     save_name = os.path.join(output_dir, 'faster_rcnn_{}_{}_{}.pth'.format(args.session, epoch, step))
     save_checkpoint({
       'session': args.session,

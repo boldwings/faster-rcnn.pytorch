@@ -7,7 +7,6 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import _init_paths
 import os
 import sys
 import numpy as np
@@ -24,17 +23,17 @@ import torch.optim as optim
 import torchvision.transforms as transforms
 import torchvision.datasets as dset
 from scipy.misc import imread
-from roi_data_layer.roidb import combined_roidb
-from roi_data_layer.roibatchLoader import roibatchLoader
-from model.utils.config import cfg, cfg_from_file, cfg_from_list, get_output_dir
-from model.rpn.bbox_transform import clip_boxes
-# from model.nms.nms_wrapper import nms
-from model.roi_layers import nms
-from model.rpn.bbox_transform import bbox_transform_inv
-from model.utils.net_utils import save_net, load_net, vis_detections
-from model.utils.blob import im_list_to_blob
-from model.faster_rcnn.vgg16 import vgg16
-from model.faster_rcnn.resnet import resnet
+from faster_rcnn.roi_data_layer.roidb import combined_roidb
+from faster_rcnn.roi_data_layer.roibatchLoader import roibatchLoader
+from faster_rcnn.model.utils.config import cfg, cfg_from_file, cfg_from_list, get_output_dir
+from faster_rcnn.model.rpn.bbox_transform import clip_boxes
+# from faster_rcnn.model.nms.nms_wrapper import nms
+from faster_rcnn.model.roi_layers import nms
+from faster_rcnn.model.rpn.bbox_transform import bbox_transform_inv
+from faster_rcnn.model.utils.net_utils import save_net, load_net, vis_detections
+from faster_rcnn.model.utils.blob import im_list_to_blob
+from faster_rcnn.model.faster_rcnn.vgg16 import vgg16
+from faster_rcnn.model.faster_rcnn.resnet import resnet
 import pdb
 
 try:
@@ -343,7 +342,7 @@ if __name__ == '__main__':
               cls_boxes = pred_boxes[inds, :]
             else:
               cls_boxes = pred_boxes[inds][:, j * 4:(j + 1) * 4]
-            
+
             cls_dets = torch.cat((cls_boxes, cls_scores.unsqueeze(1)), 1)
             # cls_dets = torch.cat((cls_boxes, cls_scores), 1)
             cls_dets = cls_dets[order]

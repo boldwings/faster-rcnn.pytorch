@@ -1,4 +1,7 @@
 data/*
+models/
+output/
+lib/data/
 
 # READ THIS BEFORE YOU REFACTOR ME
 #
@@ -194,6 +197,7 @@ caffe2/version.py
 # setup.py intermediates
 .eggs
 caffe2.egg-info
+*.egg-info
 
 # Atom/Watchman required file
 .watchmanconfig
