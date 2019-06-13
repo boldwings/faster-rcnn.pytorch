@@ -151,7 +151,7 @@ Compile the cuda dependencies using following simple commands:
 
 ```
 cd lib
-python setup.py build develop
+sudo pip install -e .
 ```
 
 It will compile all the modules you need, including NMS, ROI_Pooing, ROI_Align and ROI_Crop. The default version is compiled with Python 2.7, please compile by yourself if you are using a different python version.
