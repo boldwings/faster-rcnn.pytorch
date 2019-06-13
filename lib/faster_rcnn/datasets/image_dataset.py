@@ -60,7 +60,7 @@ class ImageDataset(imdb):
         self._devkit_path = self._get_default_path() if data_path is None else data_path
 
         self._data_path = os.path.join(data_path, name)
-        self._classes = tuple('__background__') + tuple(classes)  # always index 0
+        self._classes = tuple(['__background__']) + tuple(classes)  # always index 0
 
         self._class_to_ind = dict(zip(self.classes, xrange(self.num_classes)))
         self._image_ext = image_ext  # JPG or PNG
