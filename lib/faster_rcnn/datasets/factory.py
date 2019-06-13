@@ -15,6 +15,7 @@ from .pascal_voc import pascal_voc
 from .coco import coco
 from .imagenet import imagenet
 from .vg import vg
+from .image_dataset import ImageDataset
 
 import numpy as np
 
@@ -58,6 +59,26 @@ for split in ['train', 'val', 'val1', 'val2', 'test']:
     devkit_path = 'data/imagenet/ILSVRC/devkit'
     data_path = 'data/imagenet/ILSVRC'
     __sets[name] = (lambda split=split, devkit_path=devkit_path, data_path=data_path: imagenet(split,devkit_path,data_path))
+
+
+def add_image_dataset(name, classes, data_path=None, splits=["test", "train"],
+                      image_ext='.jpg', year='2000', cleanup=True, use_salt=True,
+                      use_diff=True, matlab_eval=False, rpn_file=None, min_size=2):
+  """
+  Adds a generic image dataset, assuming that the dataset has the correct file
+  structure.
+
+  Args:
+    name: Dataset name
+    classes: List of all classes in the dataset.
+    data_path: Path to the data.
+  """
+  for split in splits:
+    set_name = '{}_{}'.format(name, split)
+    dataset = ImageDataset(name, split, classes, data_path, image_ext, year, cleanup,
+                           use_salt, use_diff, matlab_eval, rpn_file, min_size)
+    __sets[set_name] = (lambda split=split: dataset)
+
 
 def get_imdb(name):
   """Get an imdb (image database) by name."""
