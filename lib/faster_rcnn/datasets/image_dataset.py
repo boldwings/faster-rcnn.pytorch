@@ -55,6 +55,7 @@ class ImageDataset(imdb):
             data_path: The path to the data.
         """
         imdb.__init__(self, "{}_{}".format(name, image_set))
+        self._dataset_name = name
         self._year = year
         self._image_set = image_set
         self._devkit_path = self._get_default_path() if data_path is None else data_path
@@ -294,15 +295,11 @@ class ImageDataset(imdb):
 
     def _do_python_eval(self, output_dir='output'):
         annopath = os.path.join(
-            self._devkit_path,
-            # 'VOC' + self._year,
-            '{}/'.format(self._name),
+            self._data_path,
             'Annotations',
             '{:s}.xml')
         imagesetfile = os.path.join(
-            self._devkit_path,
-            # 'VOC' + self._year,
-            '{}/'.format(self._name),
+            self._data_path,
             'ImageSets',
             'Main',
             self._image_set + '.txt')
