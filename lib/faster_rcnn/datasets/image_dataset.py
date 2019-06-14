@@ -54,7 +54,7 @@ class ImageDataset(imdb):
             classes: The classes present in the dataset.
             data_path: The path to the data.
         """
-        imdb.__init__(self, "{}_{}".format(name, image_set))
+        super(ImageDataset, self).__init__("{}_{}".format(name, image_set))
         self._dataset_name = name
         self._year = year
         self._image_set = image_set

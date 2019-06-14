@@ -75,9 +75,14 @@ def add_image_dataset(name, classes, data_path=None, splits=["test", "train"],
   """
   for split in splits:
     set_name = '{}_{}'.format(name, split)
-    dataset = ImageDataset(name, split, classes, data_path, image_ext, year, cleanup,
-                           use_salt, use_diff, matlab_eval, rpn_file, min_size)
-    __sets[set_name] = (lambda split=split: dataset)
+    __sets[set_name] = (
+      lambda name=name, split=split, classes=classes, data_path=data_path,
+             image_ext=image_ext, year=year, cleanup=cleanup, use_salt=use_salt,
+             use_diff=use_diff, matlab_eval=matlab_eval, rpn_file=rpn_file,
+             min_size=min_size:
+                ImageDataset(name, split, classes, data_path, image_ext, year, cleanup,
+                             use_salt, use_diff, matlab_eval, rpn_file, min_size)
+    )
 
 
 def get_imdb(name):

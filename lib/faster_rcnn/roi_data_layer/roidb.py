@@ -107,9 +107,13 @@ def combined_roidb(imdb_names, training=True):
 
   def get_roidb(imdb_name):
     imdb = get_imdb(imdb_name)
-    print('Loaded dataset `{:s}` for training'.format(imdb.name))
-    imdb.set_proposal_method(cfg.TRAIN.PROPOSAL_METHOD)
-    print('Set proposal method: {:s}'.format(cfg.TRAIN.PROPOSAL_METHOD))
+    print('Loaded dataset `{:s}`'.format(imdb.name))
+    if training:
+      imdb.set_proposal_method(cfg.TRAIN.PROPOSAL_METHOD)
+      print('Set proposal method: {:s}'.format(cfg.TRAIN.PROPOSAL_METHOD))
+    else:
+      imdb.set_proposal_method(cfg.TEST.PROPOSAL_METHOD)
+      print('Set proposal method: {:s}'.format(cfg.TEST.PROPOSAL_METHOD))
     roidb = get_training_roidb(imdb)
     return roidb
 
